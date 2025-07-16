@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:habit_track/tools_page/appbar.dart';
+import 'package:habit_track/features/tools/appbar.dart';
+
 
 
 class SettingsPage extends StatefulWidget {

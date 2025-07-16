@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:habit_track/controllers/habit_provider.dart';
-import 'package:habit_track/habit/habit_class.dart';
-import 'package:habit_track/habit/view_habit.dart';
-import 'package:habit_track/habit/appear_habit.dart';
-import 'package:habit_track/tools_page/appbar.dart';
+import 'package:habit_track/controllers/habit/habit_provider.dart';
+import 'package:habit_track/features/habit/appear_habit.dart';
+import 'package:habit_track/features/habit/habit.dart';
+import 'package:habit_track/features/habit/view_habit.dart';
+import 'package:habit_track/features/tools/appbar.dart';
+
 import 'package:provider/provider.dart';
 
 class Home extends StatefulWidget {

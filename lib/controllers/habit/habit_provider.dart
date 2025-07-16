@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:habit_track/habit/habit_class.dart';
+import 'package:habit_track/features/habit/habit.dart';
 
 class HabitProvider with ChangeNotifier {
   final List<Habit> _habits = [];
@@ -40,8 +40,7 @@ class HabitProvider with ChangeNotifier {
       yesterday.month,
       yesterday.day,
     );
-    // final twoday = DateTime.now().subtract(const Duration(days: 1));
-    // final twodayDateOnly = DateTime(twoday.year, twoday.month, twoday.day);
+
 
     final testHabit = Habit(
       nameHabit: 'Run',

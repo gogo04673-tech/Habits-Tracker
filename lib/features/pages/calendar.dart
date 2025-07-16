@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:habit_track/controllers/habit_provider.dart';
-import 'package:habit_track/habit/complete_habit.dart';
-import 'package:habit_track/habit/habit_class.dart';
-import 'package:habit_track/tools_page/appbar.dart';
-import 'package:habit_track/tools_page/calendar_table.dart';
+import 'package:habit_track/controllers/habit/habit_provider.dart';
+import 'package:habit_track/features/habit/complete_habit.dart';
+import 'package:habit_track/features/habit/habit.dart';
+import 'package:habit_track/features/tools/appbar.dart';
+import 'package:habit_track/features/tools/calendar_table.dart';
+
 import 'package:provider/provider.dart';
 
 class CalendarPage extends StatefulWidget {

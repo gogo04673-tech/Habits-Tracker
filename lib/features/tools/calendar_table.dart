@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:habit_track/controllers/habit_provider.dart';
-
+import 'package:habit_track/controllers/habit/habit_provider.dart';
 import 'package:provider/provider.dart';
-// import 'package:habit_track/controllers/habit_provider.dart';
-// import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class CalendarTable extends StatefulWidget {

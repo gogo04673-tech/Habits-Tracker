@@ -1,8 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:habit_track/auth/signin.dart';
-import 'package:habit_track/myTools/text_form_filed.dart';
+import 'package:habit_track/features/auth/signin.dart';
+import 'package:habit_track/features/tools/text_form_filed.dart';
+
 
 class Login extends StatefulWidget {
   const Login({super.key});

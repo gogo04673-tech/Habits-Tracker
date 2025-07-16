@@ -1,11 +1,12 @@
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:habit_track/habit/add_habit.dart';
-import 'package:habit_track/static_page/calendar.dart';
-import 'package:habit_track/static_page/home.dart';
-import 'package:habit_track/static_page/settings.dart';
-import 'package:habit_track/static_page/stats.dart';
+import 'package:habit_track/features/habit/add_habit.dart';
+import 'package:habit_track/features/pages/calendar.dart';
+import 'package:habit_track/features/pages/home.dart';
+import 'package:habit_track/features/pages/settings.dart';
+import 'package:habit_track/features/pages/stats.dart';
+
 
 class SwitchPage extends StatefulWidget {
   const SwitchPage({super.key});

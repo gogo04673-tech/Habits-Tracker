@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
-import 'package:habit_track/controllers/habit_provider.dart';
+import 'package:habit_track/controllers/habit/habit_provider.dart';
 import 'package:provider/provider.dart';
 
 class HabitBarChart extends StatefulWidget {

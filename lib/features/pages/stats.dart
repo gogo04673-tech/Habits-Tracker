@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:habit_track/controllers/habit_provider.dart';
-import 'package:habit_track/controllers/state_service.dart';
-import 'package:habit_track/myTools/bar_chart.dart';
-import 'package:habit_track/tools_page/appbar.dart';
+import 'package:habit_track/controllers/habit/habit_provider.dart';
+import 'package:habit_track/controllers/models/state_service.dart';
+import 'package:habit_track/features/tools/appbar.dart';
+import 'package:habit_track/features/tools/bar_chart.dart';
+
 import 'package:provider/provider.dart';
 
 class StatsPage extends StatefulWidget {

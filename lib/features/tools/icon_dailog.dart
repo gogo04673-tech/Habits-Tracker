@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:habit_track/controllers/habit_provider.dart';
-import 'package:habit_track/myTools/icon.dart';
+import 'package:habit_track/controllers/habit/habit_provider.dart';
+import 'package:habit_track/features/tools/icon.dart';
+
 import 'package:provider/provider.dart';
 
 class DialogIcons extends StatefulWidget {

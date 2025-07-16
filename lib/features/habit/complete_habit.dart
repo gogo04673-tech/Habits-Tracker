@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:habit_track/myTools/icon.dart';
+import 'package:habit_track/features/tools/icon.dart';
+
 
 class AppearCompleteHabit extends StatefulWidget {
   const AppearCompleteHabit({

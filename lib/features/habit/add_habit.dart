@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:habit_track/controllers/habit_provider.dart';
-import 'package:habit_track/habit/habit_class.dart';
-import 'package:habit_track/myTools/icon.dart';
-import 'package:habit_track/myTools/material_button.dart';
-import 'package:habit_track/myTools/text_form_filed.dart';
+import 'package:habit_track/controllers/habit/habit_provider.dart';
+import 'package:habit_track/features/habit/habit.dart';
+import 'package:habit_track/features/tools/icon.dart';
+import 'package:habit_track/features/tools/material_button.dart';
+import 'package:habit_track/features/tools/text_form_filed.dart';
+
+
 import 'package:provider/provider.dart';
 
 class AddHabit extends StatefulWidget {

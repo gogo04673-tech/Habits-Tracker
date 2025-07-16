@@ -1,8 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:habit_track/auth/auth_wrapper.dart';
-import 'package:habit_track/controllers/habit_provider.dart';
+import 'package:habit_track/controllers/habit/habit_provider.dart';
+import 'package:habit_track/features/auth/auth_wrapper.dart';
 import 'package:provider/provider.dart';
 
 void main() async {

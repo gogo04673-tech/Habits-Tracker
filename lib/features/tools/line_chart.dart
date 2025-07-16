@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
-import 'package:habit_track/controllers/state_service.dart';
+import 'package:habit_track/controllers/models/state_service.dart';
+
 
 class HabitProgressCard extends StatefulWidget {
   const HabitProgressCard({super.key, required this.completeDays});
