@@ -1,0 +1,6 @@
+book.png
+gym.png
+muscle.png
+pencil.png
+run.png
+sun.png

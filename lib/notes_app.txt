@@ -1,0 +1,18 @@
+
+How to add in future of Tools.
+Calendar Page: 
+✅  1. Appear and give weekend day from user or put default value Sunday.
+
+
+Home Page: 
+    1.add AI in My app habits tracker and change every day a new positive Quote.
+✅  2. check if user click on icon if click change icon to ✅.
+
+Status Page:
+
+
+Habits:
+✅  1. Add in class Habit "first date time add habit" .
+✅  2. In class Add habit in newHabit add first date time add habit.
+
+
