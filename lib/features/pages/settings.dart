@@ -3,6 +3,7 @@ import 'package:habit_track/controllers/models/provider.dart';
 import 'package:habit_track/features/tools/appbar.dart';
 import 'package:provider/provider.dart';
 
+
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
 
@@ -58,7 +59,7 @@ class _SettingsPage extends State<SettingsPage> {
 
   Widget rowArrow(String text, void Function()? onPressed) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,/*  */
       children: [
         Text(
           text,

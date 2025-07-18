@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:habit_track/controllers/database/sqldb.dart';
 import 'package:habit_track/controllers/habit/habit_provider.dart';
+import 'package:habit_track/controllers/notification/noti_service.dart';
 import 'package:habit_track/features/habit/appear_habit.dart';
 import 'package:habit_track/features/habit/habit.dart';
 import 'package:habit_track/features/habit/view_habit.dart';
@@ -16,6 +18,8 @@ class Home extends StatefulWidget {
 }
 
 class _Home extends State<Home> {
+  SqlDb sqldb = SqlDb();
+
   @override
   void initState() {
     super.initState();
@@ -112,7 +116,7 @@ class _Home extends State<Home> {
                 ),
               ),
             ),
-            
+
             // ! List of habits in ( List Tile)
             Consumer<HabitProvider>(
               builder: (context, prov, child) {
@@ -122,6 +126,8 @@ class _Home extends State<Home> {
                       Habit habit = prov.habits[i];
                       return InkWell(
                         onTap: () async {
+                          
+
                           Get.to(() => ViewHabit(habit: habit));
                         },
 

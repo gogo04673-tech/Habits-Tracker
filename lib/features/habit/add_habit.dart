@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:habit_track/controllers/database/sqldb.dart';
 import 'package:habit_track/controllers/habit/habit_provider.dart';
 import 'package:habit_track/features/habit/habit.dart';
 import 'package:habit_track/features/tools/icon.dart';
 import 'package:habit_track/features/tools/material_button.dart';
 import 'package:habit_track/features/tools/text_form_filed.dart';
-
 
 import 'package:provider/provider.dart';
 
@@ -24,6 +24,8 @@ class _AddHabit extends State<AddHabit> {
   final List<TextEditingController> subTasksController = [
     TextEditingController(),
   ];
+
+  SqlDb sqldb = SqlDb();
 
   @override
   void dispose() {
@@ -75,7 +77,7 @@ class _AddHabit extends State<AddHabit> {
     );
   }
 
-  void saveHabit() {
+  void saveHabit() async {
     DateTime now = DateTime.now();
     DateTime today = DateTime(now.year, now.month, now.day);
     final subTasks = subTasksController
@@ -96,6 +98,30 @@ class _AddHabit extends State<AddHabit> {
 
     // Add habit for use provider
     provider.addHabit(newHabit);
+
+    // ! SQFLIte
+    int response = await sqldb.insertData("""
+INSERT INTO 'habits' (
+'nameHabit', 
+'descHabit', 
+'subTasks', 
+'frequency',
+'icon', 
+'baseIcon', 
+'dateTime', 
+'completedDays') 
+VALUES ('
+${habitName.text}', 
+'${description.text}', 
+'$subTasks', 
+'${provider.frequency}', 
+'${provider.pathImage}',
+'${provider.pathImage}', 
+'$today',
+'${[today]}');
+
+""");
+    print(response);
 
     Get.back();
   }
