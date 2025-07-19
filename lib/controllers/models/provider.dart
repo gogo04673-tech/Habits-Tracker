@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:habit_track/controllers/notification/notification_service.dart';
 
 class Variables with ChangeNotifier {
   bool _allowReminder = false;
