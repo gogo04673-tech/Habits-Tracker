@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:habit_track/controllers/habit/habit_provider.dart';
 import 'package:habit_track/controllers/models/provider.dart';
-import 'package:habit_track/controllers/notification/noti_service.dart';
+import 'package:habit_track/controllers/notification/notification_service.dart';
 import 'package:habit_track/features/auth/auth_wrapper.dart';
 import 'package:provider/provider.dart';
 
@@ -11,7 +11,8 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   // init notificationsPlugin
-  NotiService().initialize();
+  NotificationService().initialize();
+
 
   // * init firebase
   await Firebase.initializeApp();

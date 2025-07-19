@@ -1,23 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:habit_track/controllers/notification/noti_service.dart';
+import 'package:habit_track/controllers/notification/notification_service.dart';
 
 class Variables with ChangeNotifier {
-  bool _darkMode = false;
+  bool _allowReminder = false;
 
-  bool get darkMode => _darkMode;
+  bool get allowReminder => _allowReminder;
 
   void changeMode(bool value) async {
-    _darkMode = value;
-    await NotiService().initialize();
-    DateTime now = DateTime.now();
-    await NotiService().scheduleNotification(
-      title: "Test Notification",
-      body: "This is a test notification",
-      hour: 01,
-      minute: 05,
-    );
+    _allowReminder = value;
+    notifyListeners();
+  }
 
-    print("${now.hour}: ${now.minute + 1}");
+  String constTime = "09:00 AM";
+
+  String timeReminder = '';
+
+  formatTimeOfDay(DateTime time) {
+    final hour = time.hour.toString().padLeft(2, '0');
+    final minute = time.minute.toString().padLeft(2, '0');
+    timeReminder = '$hour:$minute ${time.hour > 12 ? 'AM' : 'PM'}';
     notifyListeners();
   }
 }

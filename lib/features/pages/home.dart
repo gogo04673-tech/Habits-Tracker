@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:habit_track/controllers/database/sqldb.dart';
 import 'package:habit_track/controllers/habit/habit_provider.dart';
-import 'package:habit_track/controllers/notification/noti_service.dart';
 import 'package:habit_track/features/habit/appear_habit.dart';
 import 'package:habit_track/features/habit/habit.dart';
 import 'package:habit_track/features/habit/view_habit.dart';

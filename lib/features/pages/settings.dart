@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart'
+    as picker;
+import 'package:get/get.dart';
+
 import 'package:habit_track/controllers/models/provider.dart';
+import 'package:habit_track/controllers/notification/notification_service.dart';
 import 'package:habit_track/features/tools/appbar.dart';
 import 'package:provider/provider.dart';
-
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
@@ -59,7 +63,8 @@ class _SettingsPage extends State<SettingsPage> {
 
   Widget rowArrow(String text, void Function()? onPressed) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,/*  */
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      /*  */
       children: [
         Text(
           text,
@@ -76,6 +81,27 @@ class _SettingsPage extends State<SettingsPage> {
           icon: const Icon(Icons.arrow_forward),
         ),
       ],
+    );
+  }
+
+  // * Date time picker
+  pickerTime() {
+    return picker.DatePicker.showTimePicker(
+      context,
+      showTitleActions: true,
+      currentTime: DateTime.now(),
+
+      onConfirm: (time) {
+        Variables prov = context.read<Variables>();
+        prov.formatTimeOfDay(time);
+        NotificationService().scheduleDaily(
+          title: "Reminder Time",
+          body: "This time of habit",
+          hour: time.hour,
+          minute: time.minute,
+        );
+      },
+      locale: picker.LocaleType.en,
     );
   }
 
@@ -99,7 +125,7 @@ class _SettingsPage extends State<SettingsPage> {
               Consumer<Variables>(
                 builder: (context, provider, child) {
                   return Switch(
-                    value: provider.darkMode,
+                    value: provider.allowReminder,
                     onChanged: (value) => provider.changeMode(value),
 
                     activeTrackColor: const Color.fromARGB(255, 54, 87, 105),
@@ -118,10 +144,23 @@ class _SettingsPage extends State<SettingsPage> {
               Consumer<Variables>(
                 builder: (context, provider, child) {
                   return InkWell(
-                    onTap: () {},
-                    child: const Text(
-                      "9:00 AM",
-                      style: TextStyle(
+                    onTap: () {
+                      if (provider.allowReminder) {
+                        pickerTime();
+                      } else {
+                        Get.snackbar(
+                          "Time Reminder",
+                          "Please Enable Daily Reminder if you want Reminder",
+                        );
+                      }
+                    },
+                    highlightColor: Colors.transparent,
+                    splashColor: Colors.transparent,
+                    child: Text(
+                      provider.timeReminder.isEmpty
+                          ? provider.constTime
+                          : provider.timeReminder,
+                      style: const TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.w400,
                         fontSize: 18,

@@ -3,7 +3,7 @@ import 'package:timezone/timezone.dart' as tz;
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:flutter_timezone/flutter_timezone.dart';
 
-class NotiService {
+class NotificationService {
   final FlutterLocalNotificationsPlugin notificationsPlugin =
       FlutterLocalNotificationsPlugin();
 
@@ -24,6 +24,13 @@ class NotiService {
     const initSettingsAndroid = AndroidInitializationSettings(
       '@mipmap/ic_launcher',
     );
+
+    // * Request Notifications Android
+    notificationsPlugin
+        .resolvePlatformSpecificImplementation<
+          AndroidFlutterLocalNotificationsPlugin
+        >()
+        ?.requestNotificationsPermission();
 
     // iOS init settings
     const initSettingsIos = DarwinInitializationSettings(
@@ -65,48 +72,44 @@ class NotiService {
     return notificationsPlugin.show(id, title, body, notificationDetails());
   }
 
-  // Schedule notification at specific hour/minute today
-  Future<void> scheduleNotification({
-    int id = 1,
+  // Schedule notification at specific hour/minute today and daily
+  Future<void> scheduleDaily({
+    int id = 2,
     required String title,
     required String body,
     required int hour,
     required int minute,
-    int seconds = 0
   }) async {
-    final now = tz.TZDateTime.now(tz.local);
+    await notificationsPlugin.zonedSchedule(
+      id,
+      title,
+      body,
+      _nextInstanceOfTime(hour, minute),
+      notificationDetails(),
+      androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
+      uiLocalNotificationDateInterpretation:
+          UILocalNotificationDateInterpretation.absoluteTime,
+      matchDateTimeComponents: DateTimeComponents.time,
+    );
+  }
 
-    var scheduledDate = tz.TZDateTime(
+  tz.TZDateTime _nextInstanceOfTime(int hour, int minute) {
+    final now = tz.TZDateTime.now(tz.local);
+    var scheduled = tz.TZDateTime(
       tz.local,
       now.year,
       now.month,
       now.day,
       hour,
       minute,
-      seconds,
     );
-
-    // If the time has already passed today, schedule it for tomorrow
-    if (scheduledDate.isBefore(now)) {
-      scheduledDate = scheduledDate.add(const Duration(days: 1));
+    if (scheduled.isBefore(now)) {
+      scheduled = scheduled.add(const Duration(days: 1));
     }
-
-    await notificationsPlugin.zonedSchedule(
-      id,
-      title,
-      body,
-      scheduledDate,
-      notificationDetails(), 
-
-      androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,
-      matchDateTimeComponents: DateTimeComponents.time,
-      // uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime,
-      uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime
-      
-
-
-    );
+    return scheduled;
   }
+
+  
 
   // Cancel all notifications
   Future<void> cancelNotification() async {
