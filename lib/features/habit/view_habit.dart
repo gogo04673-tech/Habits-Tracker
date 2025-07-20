@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:habit_track/controllers/habit/habit_provider.dart';
+import 'package:habit_track/controllers/state_management/habit_provider.dart';
 import 'package:habit_track/controllers/models/state_service.dart';
 import 'package:habit_track/features/habit/habit.dart';
 import 'package:habit_track/features/tools/icon.dart';

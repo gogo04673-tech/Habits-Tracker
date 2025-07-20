@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:habit_track/controllers/habit/habit_provider.dart';
+import 'package:habit_track/controllers/state_management/habit_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
 

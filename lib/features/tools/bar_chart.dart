@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
-import 'package:habit_track/controllers/habit/habit_provider.dart';
-import 'package:provider/provider.dart';
 
 class HabitBarChart extends StatefulWidget {
   const HabitBarChart({
@@ -9,6 +7,7 @@ class HabitBarChart extends StatefulWidget {
     required this.toYList,
     required this.listBar,
   });
+
   final List<double> toYList;
   final List listBar;
 
@@ -21,13 +20,12 @@ class _HabitBarChartState extends State<HabitBarChart> {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: const Color(0xFF111C22),
+        color: Theme.of(context).colorScheme.secondaryContainer,
         borderRadius: BorderRadius.circular(20),
       ),
       child: Container(
         height: 150,
         margin: const EdgeInsets.only(left: 20),
-
         child: TweenAnimationBuilder(
           tween: Tween<double>(
             begin: 0,
@@ -37,13 +35,28 @@ class _HabitBarChartState extends State<HabitBarChart> {
           builder: (context, valueAnimation, child) {
             return BarChart(
               BarChartData(
-                maxY: context.read<HabitProvider>().habits.length.toDouble(),
+                maxY: 8,
+                barTouchData: BarTouchData(
+                  enabled: false,
+                  touchTooltipData: BarTouchTooltipData(
+                    tooltipPadding: EdgeInsets.zero,
+                    getTooltipItem: (_, __, ___, ____) => null,
+                    getTooltipColor: (group) => Colors.transparent,
+                  ),
+                ),
                 backgroundColor: Colors.transparent,
                 gridData: const FlGridData(show: false),
                 borderData: FlBorderData(show: false),
                 alignment: BarChartAlignment.spaceAround,
                 titlesData: FlTitlesData(
+                  show: true,
                   leftTitles: const AxisTitles(
+                    sideTitles: SideTitles(showTitles: false),
+                  ),
+                  topTitles: const AxisTitles(
+                    sideTitles: SideTitles(showTitles: false),
+                  ),
+                  rightTitles: const AxisTitles(
                     sideTitles: SideTitles(showTitles: false),
                   ),
                   bottomTitles: AxisTitles(
@@ -53,8 +66,8 @@ class _HabitBarChartState extends State<HabitBarChart> {
                         final columnList = widget.listBar;
                         return Text(
                           columnList[value.toInt()],
-                          style: const TextStyle(
-                            color: Colors.white54,
+                          style: TextStyle(
+                            color: Theme.of(context).colorScheme.secondary,
                             fontSize: 12,
                           ),
                         );
@@ -62,30 +75,21 @@ class _HabitBarChartState extends State<HabitBarChart> {
                     ),
                   ),
                 ),
-                barGroups: [
-                  for (int i = 0; i < widget.listBar.length; i++)
-                    BarChartGroupData(
-                      x: i,
-                      barRods: [
-                        BarChartRodData(
-                          toY: (widget.toYList[i] > valueAnimation)
-                              ? valueAnimation
-                              : widget.toYList[i],
-                          // ignore: deprecated_member_use
-                          color: Colors.white.withOpacity(0.15),
-                          width: 24,
-                          borderRadius: BorderRadius.circular(6),
-                          rodStackItems: [
-                            BarChartRodStackItem(
-                              5.9,
-                              6,
-                              Colors.white,
-                            ), // this border top
-                          ],
-                        ),
-                      ],
-                    ),
-                ],
+                barGroups: List.generate(widget.listBar.length, (i) {
+                  return BarChartGroupData(
+                    x: i,
+                    barRods: [
+                      BarChartRodData(
+                        toY: (widget.toYList[i] > valueAnimation)
+                            ? valueAnimation
+                            : widget.toYList[i],
+                        color: Theme.of(context).colorScheme.onPrimaryContainer,
+                        width: 24,
+                        borderRadius: BorderRadius.circular(6),
+                      ),
+                    ],
+                  );
+                }),
               ),
             );
           },

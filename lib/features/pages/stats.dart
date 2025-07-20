@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:habit_track/controllers/habit/habit_provider.dart';
+import 'package:habit_track/controllers/state_management/habit_provider.dart';
 import 'package:habit_track/controllers/models/state_service.dart';
 import 'package:habit_track/features/tools/appbar.dart';
 import 'package:habit_track/features/tools/bar_chart.dart';
@@ -48,10 +48,10 @@ class _StatsPage extends State<StatsPage> {
         padding: const EdgeInsets.all(10),
         child: ListView(
           children: [
-            const Text(
+            Text(
               "Weekly Progress",
               style: TextStyle(
-                color: Colors.white,
+                color: Theme.of(context).colorScheme.primary,
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
               ),
@@ -65,7 +65,9 @@ class _StatsPage extends State<StatsPage> {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),
                 // ignore: deprecated_member_use
-                side: BorderSide(color: Colors.white.withOpacity(0.1)),
+                side: BorderSide(
+                  color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
+                ),
               ),
               borderOnForeground: true,
               child: Container(
@@ -75,10 +77,10 @@ class _StatsPage extends State<StatsPage> {
 
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
+                    Text(
                       "Habits Completion",
                       style: TextStyle(
-                        color: Colors.white,
+                        color: Theme.of(context).colorScheme.primary,
                         fontSize: 14,
                         fontWeight: FontWeight.w400,
                       ),
@@ -86,8 +88,8 @@ class _StatsPage extends State<StatsPage> {
                     const SizedBox(height: 10),
                     Text(
                       "${countProgressWeek()}%",
-                      style: const TextStyle(
-                        color: Colors.white,
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.primary,
                         fontSize: 28,
                         fontWeight: FontWeight.bold,
                       ),
@@ -139,10 +141,10 @@ class _StatsPage extends State<StatsPage> {
 
             const SizedBox(height: 15),
 
-            const Text(
+            Text(
               "Monthly Overview",
               style: TextStyle(
-                color: Colors.white,
+                color: Theme.of(context).colorScheme.primary,
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
               ),
@@ -156,7 +158,9 @@ class _StatsPage extends State<StatsPage> {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),
                 // ignore: deprecated_member_use
-                side: BorderSide(color: Colors.white.withOpacity(0.1)),
+                side: BorderSide(
+                  color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
+                ),
               ),
               borderOnForeground: true,
               child: Container(
@@ -166,10 +170,10 @@ class _StatsPage extends State<StatsPage> {
 
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
+                    Text(
                       "Habits Completion",
                       style: TextStyle(
-                        color: Colors.white,
+                        color: Theme.of(context).colorScheme.primary,
                         fontSize: 14,
                         fontWeight: FontWeight.w400,
                       ),
@@ -177,8 +181,8 @@ class _StatsPage extends State<StatsPage> {
                     const SizedBox(height: 10),
                     Text(
                       "$monthProgress%",
-                      style: const TextStyle(
-                        color: Colors.white,
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.primary,
                         fontSize: 28,
                         fontWeight: FontWeight.bold,
                       ),

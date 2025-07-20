@@ -7,7 +7,6 @@ import 'package:habit_track/features/pages/home.dart';
 import 'package:habit_track/features/pages/settings.dart';
 import 'package:habit_track/features/pages/stats.dart';
 
-
 class SwitchPage extends StatefulWidget {
   const SwitchPage({super.key});
 
@@ -60,10 +59,8 @@ class _SwitchPageState extends State<SwitchPage> {
 
       floatingActionButton: _bottomNavIndex == 0
           ? FloatingActionButton(
-            
               shape: const CircleBorder(),
               onPressed: () async {
-
                 await Get.to(() => const AddHabit());
               },
               backgroundColor: const Color(0xFF47b5eb),

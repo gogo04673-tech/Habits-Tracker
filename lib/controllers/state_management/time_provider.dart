@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class Variables with ChangeNotifier {
+class TimeProvider with ChangeNotifier {
   bool _allowReminder = false;
 
   bool get allowReminder => _allowReminder;

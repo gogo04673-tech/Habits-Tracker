@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart'
     as picker;
 import 'package:get/get.dart';
+import 'package:habit_track/controllers/state_management/theme_provider.dart';
 
-import 'package:habit_track/controllers/models/provider.dart';
+import 'package:habit_track/controllers/state_management/time_provider.dart';
 import 'package:habit_track/controllers/notification/notification_service.dart';
+import 'package:habit_track/features/pages/change_pass.dart';
+import 'package:habit_track/features/pages/edit_profile.dart';
 import 'package:habit_track/features/tools/appbar.dart';
 import 'package:provider/provider.dart';
 
@@ -20,8 +23,8 @@ class _SettingsPage extends State<SettingsPage> {
   Widget upText(String text) {
     return Text(
       text,
-      style: const TextStyle(
-        color: Colors.white,
+      style: TextStyle(
+        color: Theme.of(context).colorScheme.primary,
         fontSize: 20,
         fontWeight: FontWeight.bold,
       ),
@@ -38,8 +41,8 @@ class _SettingsPage extends State<SettingsPage> {
             children: [
               TextSpan(
                 text: "$title\n",
-                style: const TextStyle(
-                  color: Colors.white,
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.primary,
                   fontSize: 18,
                   fontWeight: FontWeight.w500,
                 ),
@@ -47,7 +50,7 @@ class _SettingsPage extends State<SettingsPage> {
               TextSpan(
                 text: subtitle,
                 style: const TextStyle(
-                  color: Colors.white38,
+                  color: Colors.grey,
                   fontSize: 12,
                   fontWeight: FontWeight.w400,
                 ),
@@ -62,25 +65,29 @@ class _SettingsPage extends State<SettingsPage> {
   }
 
   Widget rowArrow(String text, void Function()? onPressed) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      /*  */
-      children: [
-        Text(
-          text,
-          style: const TextStyle(
-            color: Colors.white,
-            fontSize: 18,
-            fontWeight: FontWeight.w500,
+    return InkWell(
+      highlightColor: Colors.transparent,
+      splashColor: Colors.transparent,
+      onTap: onPressed,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        /*  */
+        children: [
+          Text(
+            text,
+            style: TextStyle(
+              color: Theme.of(context).colorScheme.primary,
+              fontSize: 18,
+              fontWeight: FontWeight.w500,
+            ),
           ),
-        ),
 
-        IconButton(
-          onPressed: onPressed,
-          color: Colors.white,
-          icon: const Icon(Icons.arrow_forward),
-        ),
-      ],
+          Icon(
+            Icons.arrow_forward,
+            color: Theme.of(context).colorScheme.primary,
+          ),
+        ],
+      ),
     );
   }
 
@@ -92,7 +99,7 @@ class _SettingsPage extends State<SettingsPage> {
       currentTime: DateTime.now(),
 
       onConfirm: (time) {
-        Variables prov = context.read<Variables>();
+        TimeProvider prov = context.read<TimeProvider>();
         prov.formatTimeOfDay(time);
         NotificationService().scheduleDaily(
           title: "Reminder Time",
@@ -122,7 +129,7 @@ class _SettingsPage extends State<SettingsPage> {
             listTile(
               "Daily Reminder",
               'Enable or disable daily reminder',
-              Consumer<Variables>(
+              Consumer<TimeProvider>(
                 builder: (context, provider, child) {
                   return Switch(
                     value: provider.allowReminder,
@@ -141,7 +148,7 @@ class _SettingsPage extends State<SettingsPage> {
             listTile(
               "Reminder Time",
               'Set the time for your daily reminder',
-              Consumer<Variables>(
+              Consumer<TimeProvider>(
                 builder: (context, provider, child) {
                   return InkWell(
                     onTap: () {
@@ -160,8 +167,8 @@ class _SettingsPage extends State<SettingsPage> {
                       provider.timeReminder.isEmpty
                           ? provider.constTime
                           : provider.timeReminder,
-                      style: const TextStyle(
-                        color: Colors.white,
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.primary,
                         fontWeight: FontWeight.w400,
                         fontSize: 18,
                       ),
@@ -181,15 +188,12 @@ class _SettingsPage extends State<SettingsPage> {
             listTile(
               "Theme",
               'Switch between light and dark mode',
-              Consumer<Variables>(
-                builder: (context, provider, child) {
-                  return const Text(
-                    "Light",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w400,
-                      fontSize: 18,
-                    ),
+              Consumer<ThemeProvider>(
+                builder: (context, theme, child) {
+                  return Switch(
+                    value: theme.isDark,
+                    onChanged: theme.changeTheme,
+                    activeTrackColor: const Color(0xFF243b47),
                   );
                 },
               ),
@@ -201,11 +205,15 @@ class _SettingsPage extends State<SettingsPage> {
             upText("Account"),
 
             const SizedBox(height: 20),
-            rowArrow("Edit Profile", () {}),
+            rowArrow("Edit Profile", () {
+              Get.to(() => const EditProfile());
+            }),
 
             // * Edit account is here
             const SizedBox(height: 20),
-            rowArrow("Change Password", () {}),
+            rowArrow("Change Password", () {
+              Get.to(() => const ChangePassword());
+            }),
           ],
         ),
       ),

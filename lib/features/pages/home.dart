@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:habit_track/controllers/database/sqldb.dart';
-import 'package:habit_track/controllers/habit/habit_provider.dart';
+import 'package:habit_track/controllers/state_management/habit_provider.dart';
 import 'package:habit_track/features/habit/appear_habit.dart';
 import 'package:habit_track/features/habit/habit.dart';
 import 'package:habit_track/features/habit/view_habit.dart';
@@ -90,10 +90,10 @@ class _Home extends State<Home> {
             // * text of Today's Quote
             Container(
               margin: const EdgeInsets.only(top: 10),
-              child: const Text(
+              child: Text(
                 "Today's Quote",
                 style: TextStyle(
-                  color: Colors.white,
+                  color: Theme.of(context).colorScheme.primary,
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
                 ),
@@ -106,10 +106,10 @@ class _Home extends State<Home> {
             // * text Habits
             Container(
               margin: const EdgeInsets.symmetric(vertical: 10),
-              child: const Text(
+              child: Text(
                 "Habits",
                 style: TextStyle(
-                  color: Colors.white,
+                  color: Theme.of(context).colorScheme.primary,
                   fontWeight: FontWeight.bold,
                   fontSize: 20,
                 ),
@@ -125,8 +125,6 @@ class _Home extends State<Home> {
                       Habit habit = prov.habits[i];
                       return InkWell(
                         onTap: () async {
-                          
-
                           Get.to(() => ViewHabit(habit: habit));
                         },
 

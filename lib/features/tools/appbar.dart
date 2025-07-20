@@ -6,37 +6,46 @@ class BarApp extends StatelessWidget implements PreferredSizeWidget {
     required this.titlePage,
     this.icon,
     this.onPressed,
+    this.leading = false,
+    this.onTap,
   });
   final String titlePage;
-  final IconData? icon ;
+  final IconData? icon;
   final void Function()? onPressed;
+  final void Function()? onTap;
+  final bool leading;
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      leading: !leading
+          ? null
+          : IconButton(
+              onPressed: onTap,
+              icon: const Icon(Icons.arrow_back),
+              color: Theme.of(context).colorScheme.primary,
+            ),
       centerTitle: true,
       title: Text(
         titlePage,
-        style: const TextStyle(
-          color: Colors.white,
+        style: TextStyle(
+          color: Theme.of(context).colorScheme.primary,
           fontSize: 24,
           fontWeight: FontWeight.bold,
         ),
       ),
-      backgroundColor: const Color(0xFF111C22),
+
       actions: [
         IconButton(
           onPressed: onPressed,
           icon: Icon(icon),
           iconSize: 30,
-          color: Colors.white,
+          color: Theme.of(context).colorScheme.primary,
         ),
       ],
     );
   }
 
   @override
-  Size get preferredSize =>  const Size.fromHeight(kToolbarHeight);
-
-
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }

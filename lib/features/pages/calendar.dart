@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:habit_track/controllers/habit/habit_provider.dart';
+import 'package:habit_track/controllers/state_management/habit_provider.dart';
 import 'package:habit_track/features/habit/complete_habit.dart';
 import 'package:habit_track/features/habit/habit.dart';
 import 'package:habit_track/features/tools/appbar.dart';

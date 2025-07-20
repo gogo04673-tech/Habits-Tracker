@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:habit_track/controllers/habit/habit_provider.dart';
+import 'package:habit_track/controllers/state_management/habit_provider.dart';
 import 'package:habit_track/features/tools/icon.dart';
 
 import 'package:provider/provider.dart';
@@ -13,13 +13,12 @@ class DialogIcons extends StatefulWidget {
 }
 
 class _Dialog extends State<DialogIcons> {
-
   _dialog() {
     return Get.dialog(
       Center(
         child: Material(
           // 👈 أضف هذا
-          color: Colors.transparent, 
+          color: Colors.transparent,
           child: Container(
             padding: const EdgeInsets.all(16),
             width: 300,
@@ -59,7 +58,9 @@ class _Dialog extends State<DialogIcons> {
                 ),
                 Container(
                   margin: const EdgeInsets.symmetric(vertical: 10),
-                  child: IconHabit(imagePath: context.read<HabitProvider>().pathImage),
+                  child: IconHabit(
+                    imagePath: context.read<HabitProvider>().pathImage,
+                  ),
                 ),
                 const Divider(color: Colors.white10),
                 GridView.builder(
