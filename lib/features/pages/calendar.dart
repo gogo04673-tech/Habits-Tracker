@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:habit_track/controllers/state_management/habit_provider.dart';
 import 'package:habit_track/features/habit/complete_habit.dart';
 import 'package:habit_track/features/habit/habit.dart';
 import 'package:habit_track/features/tools/appbar.dart';
 import 'package:habit_track/features/tools/calendar_table.dart';
+import 'package:habit_track/features/tools/text.dart';
+import 'package:habit_track/test.dart';
 
 import 'package:provider/provider.dart';
 
@@ -30,14 +33,7 @@ class _CalendarPage extends State<CalendarPage> {
             // * Text of Habits Complete
             Container(
               margin: const EdgeInsets.symmetric(vertical: 15),
-              child: const Text(
-                "Habits Completion",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
-                ),
-              ),
+              child: const MainText(text: "Habits Complete"),
             ),
 
             // * show completion habits
@@ -59,6 +55,9 @@ class _CalendarPage extends State<CalendarPage> {
                               title: habit.nameHabit,
                               pathIcon: habit.baseIcon,
                               isDone: isDone,
+                              onTap: () {
+                                // Get.to(() => Test());
+                              },
                             );
                     },
                   );

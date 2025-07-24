@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:habit_track/features/tools/icon.dart';
 
-
 class AppearCompleteHabit extends StatefulWidget {
   const AppearCompleteHabit({
     super.key,
@@ -25,10 +24,7 @@ class _AppearCompleteHabit extends State<AppearCompleteHabit> {
     return ListTile(
       title: Text(
         "${widget.title[0].toUpperCase()}${widget.title.substring(1)}",
-        style: const TextStyle(
-          color: Colors.white,
-          fontWeight: FontWeight.bold,
-        ),
+        style: Theme.of(context).textTheme.bodyMedium,
       ),
 
       leading: InkWell(

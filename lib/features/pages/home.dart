@@ -1,22 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'package:get/get.dart';
 import 'package:habit_track/controllers/database/sqldb.dart';
 import 'package:habit_track/controllers/state_management/habit_provider.dart';
+
 import 'package:habit_track/features/habit/appear_habit.dart';
 import 'package:habit_track/features/habit/habit.dart';
 import 'package:habit_track/features/habit/view_habit.dart';
+
 import 'package:habit_track/features/tools/appbar.dart';
+import 'package:habit_track/features/tools/text.dart';
 
-import 'package:provider/provider.dart';
+import 'package:provider/provider.dart' as prov;
 
-class Home extends StatefulWidget {
+class Home extends ConsumerStatefulWidget {
   const Home({super.key});
 
   @override
-  State<Home> createState() => _Home();
+  ConsumerState<Home> createState() => _Home();
 }
 
-class _Home extends State<Home> {
+class _Home extends ConsumerState<Home> {
   SqlDb sqldb = SqlDb();
 
   @override
@@ -25,7 +30,7 @@ class _Home extends State<Home> {
 
     Future.microtask(() {
       // ignore: use_build_context_synchronously
-      Provider.of<HabitProvider>(context, listen: false).checkDailyReset();
+      prov.Provider.of<HabitProvider>(context, listen: false).checkDailyReset();
     });
   }
 
@@ -51,14 +56,9 @@ class _Home extends State<Home> {
             child: const Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  "The only way to do great \nwork is to love what you do.",
-                  textAlign: TextAlign.start,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 22,
-                    fontWeight: FontWeight.bold,
-                  ),
+                MainText(
+                  text:
+                      "The only way to do great \nwork is to love what you do.",
                 ),
 
                 Text(
@@ -81,43 +81,23 @@ class _Home extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       // * appBar is here
-      appBar: const BarApp(titlePage: "Daily Habits", icon: Icons.settings),
+      appBar: const BarApp(titlePage: "Daily Habits"),
 
       body: Container(
         padding: const EdgeInsets.symmetric(horizontal: 10),
         child: ListView(
           children: [
             // * text of Today's Quote
-            Container(
-              margin: const EdgeInsets.only(top: 10),
-              child: Text(
-                "Today's Quote",
-                style: TextStyle(
-                  color: Theme.of(context).colorScheme.primary,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
+            const MainText(text: "Today's Quote"),
 
             //* Card of today quote
             _cardQuote(),
 
             // * text Habits
-            Container(
-              margin: const EdgeInsets.symmetric(vertical: 10),
-              child: Text(
-                "Habits",
-                style: TextStyle(
-                  color: Theme.of(context).colorScheme.primary,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
-                ),
-              ),
-            ),
+            const MainText(text: "Habits"),
 
             // ! List of habits in ( List Tile)
-            Consumer<HabitProvider>(
+            prov.Consumer<HabitProvider>(
               builder: (context, prov, child) {
                 return Column(
                   children: [
@@ -127,11 +107,8 @@ class _Home extends State<Home> {
                         onTap: () async {
                           Get.to(() => ViewHabit(habit: habit));
                         },
-
                         child: AppearHabit(
-                          title: habit.nameHabit,
-                          subtitle: habit.subTasks.join(", "),
-                          path: habit.icon,
+                          habit: habit,
                           onTap: () {
                             if (habit.icon == prov.doneIcon) {
                               prov.markHabitNotAsDone(habit);

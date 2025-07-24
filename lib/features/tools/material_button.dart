@@ -74,15 +74,11 @@ class _ButtonMaterial extends State<ButtonMaterial> {
               ? const Color(0xFF47b5eb)
               : Colors.transparent,
           borderRadius: BorderRadius.circular(15),
-          border: Border.all(color: Colors.white), // fixed this line too
+          border: Border.all(
+            color: Theme.of(context).colorScheme.primary,
+          ), // fixed this line too
         ),
-        child: Text(
-          widget.title,
-          style: const TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
+        child: Text(widget.title, style: Theme.of(context).textTheme.bodySmall),
       ),
     );
   }

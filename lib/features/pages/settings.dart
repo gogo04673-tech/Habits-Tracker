@@ -115,7 +115,7 @@ class _SettingsPage extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const BarApp(titlePage: 'Settings', icon: null),
+      appBar: const BarApp(titlePage: 'Settings'),
       body: Container(
         padding: const EdgeInsets.all(10),
         child: ListView(

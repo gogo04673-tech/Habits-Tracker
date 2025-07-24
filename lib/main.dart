@@ -7,7 +7,8 @@ import 'package:habit_track/controllers/state_management/theme_provider.dart';
 import 'package:habit_track/controllers/state_management/time_provider.dart';
 import 'package:habit_track/controllers/notification/notification_service.dart';
 import 'package:habit_track/features/auth/auth_wrapper.dart';
-import 'package:provider/provider.dart';
+import 'package:provider/provider.dart' as pr;
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,15 +18,16 @@ void main() async {
 
   // * init firebase
   await Firebase.initializeApp();
+
   runApp(
-    MultiProvider(
+    pr.MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => HabitProvider()),
-        ChangeNotifierProvider(create: (_) => TimeProvider()),
-        ChangeNotifierProvider(create: (_) => AuthProvider()),
-        ChangeNotifierProvider(create: (_) => ThemeProvider()),
+        pr.ChangeNotifierProvider(create: (_) => HabitProvider()),
+        pr.ChangeNotifierProvider(create: (_) => TimeProvider()),
+        pr.ChangeNotifierProvider(create: (_) => AuthProvider()),
+        pr.ChangeNotifierProvider(create: (_) => ThemeProvider()),
       ],
-      child: const MyApp(),
+      child: const ProviderScope(child: MyApp()),
     ),
   );
 }
@@ -36,16 +38,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      debugShowCheckedModeBanner:
+          false, // * remove debug banner from application
       home: const AuthWrapper(),
-      theme: Provider.of<ThemeProvider>(context).themeData,
+      theme: pr.Provider.of<ThemeProvider>(context).themeData,
     );
   }
 }
-
-/// ThemeData(
-       // scaffoldBackgroundColor: const Color(0xFF111C22),
-       /// bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-//backgroundColor: Color(0xFF192933),
-       // ),
-        // You can add other theme properties here
-      //),

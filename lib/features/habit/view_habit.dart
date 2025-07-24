@@ -133,9 +133,7 @@ class _ViewHabitState extends State<ViewHabit> {
 
                     IconButton(
                       onPressed: () {
-                        setState(() {
-                          Get.back();
-                        });
+                        Get.back();
                       },
                       icon: const Icon(Icons.done),
                       color: Colors.white,
@@ -221,6 +219,7 @@ class _ViewHabitState extends State<ViewHabit> {
                         setState(() {
                           context.read<HabitProvider>().pathImage = path;
                         });
+
                         Get.back();
                       },
                       child: IconHabit(imagePath: path),

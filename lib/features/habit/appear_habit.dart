@@ -1,18 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:habit_track/features/habit/habit.dart';
 import 'package:habit_track/features/tools/icon.dart';
 
-
 class AppearHabit extends StatefulWidget {
-  const AppearHabit({
-    super.key,
-    required this.title,
-    required this.subtitle,
-    required this.path,
-    this.onTap,
-  });
-  final String title;
-  final String subtitle;
-  final String path;
+  const AppearHabit({super.key, this.onTap, required this.habit});
+  final Habit habit;
   final void Function()? onTap;
 
   @override
@@ -20,25 +12,27 @@ class AppearHabit extends StatefulWidget {
 }
 
 class _Habit extends State<AppearHabit> {
+  double countProgress() {
+    double total = widget.habit.completedDays.length * (100 / 7);
+    return total;
+  }
+
   @override
   Widget build(BuildContext context) {
     return ListTile(
       title: Text(
-        "${widget.title[0].toUpperCase()}${widget.title.substring(1)}",
-        style: const TextStyle(
-          color: Colors.white,
-          fontWeight: FontWeight.bold,
-        ),
+        "${widget.habit.nameHabit[0].toUpperCase()}${widget.habit.nameHabit.substring(1)}",
+        style: Theme.of(context).textTheme.bodyMedium,
       ),
       subtitle: Text(
-        "SubTasks: ${widget.subtitle}",
-        style: const TextStyle(color: Color.fromARGB(255, 189, 205, 214)),
+        "SubTasks: ${widget.habit.subTasks.join(", ")}",
+        style: Theme.of(context).textTheme.bodySmall,
       ),
       leading: InkWell(
         highlightColor: Colors.transparent,
         splashColor: Colors.transparent,
         onTap: widget.onTap,
-        child: IconHabit(imagePath: widget.path),
+        child: IconHabit(imagePath: widget.habit.icon),
       ),
       trailing: SizedBox(
         width: 80, // Adjust width as needed
@@ -46,17 +40,14 @@ class _Habit extends State<AppearHabit> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            const Text(
-              "75%", // Your progress number
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-              ),
+            Text(
+              "${countProgress().toStringAsFixed(2)}%", // Your progress number
+              style: Theme.of(context).textTheme.bodySmall,
             ),
             const SizedBox(height: 4),
             LinearProgressIndicator(
-              value: 0.75, // 75% progress
-              backgroundColor: Colors.white24,
+              value: countProgress() / 100, // 75% progress
+              backgroundColor: Colors.grey,
               valueColor: const AlwaysStoppedAnimation<Color>(Colors.blue),
               minHeight: 3,
               borderRadius: BorderRadius.circular(10),

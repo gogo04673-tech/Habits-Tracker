@@ -10,7 +10,7 @@ class TextFiledForm extends StatefulWidget {
     this.obscureText = false,
     this.stateIcon = false,
     this.maxLines = 1, // Add this
-    this.minLines,     // Add this
+    this.minLines, // Add this
   });
 
   final String hintText;
@@ -21,8 +21,6 @@ class TextFiledForm extends StatefulWidget {
   final bool stateIcon;
   final int maxLines; // Add this
   final int? minLines;
-
-
 
   @override
   State<TextFiledForm> createState() => _TextFormFiledState();
@@ -46,10 +44,11 @@ class _TextFormFiledState extends State<TextFiledForm> {
         validator: widget.validator,
         keyboardType: widget.keyboardType,
         obscureText: _obscureText,
-        maxLines: widget.maxLines,   // Add this
-        minLines: widget.minLines,   // Add this
+        maxLines: widget.maxLines, // Add this
+        minLines: widget.minLines, // Add this
         style: const TextStyle(
           color: Colors.white,
+          fontSize: 16,
           decoration: TextDecoration.none,
         ),
         cursorColor: const Color.fromARGB(255, 156, 156, 156),

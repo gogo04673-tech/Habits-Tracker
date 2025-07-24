@@ -3,6 +3,7 @@ import 'package:habit_track/controllers/state_management/habit_provider.dart';
 import 'package:habit_track/controllers/models/state_service.dart';
 import 'package:habit_track/features/tools/appbar.dart';
 import 'package:habit_track/features/tools/bar_chart.dart';
+import 'package:habit_track/features/tools/text.dart';
 
 import 'package:provider/provider.dart';
 
@@ -43,21 +44,12 @@ class _StatsPage extends State<StatsPage> {
     int monthProgress = lst.reduce((a, b) => a + b).toInt();
 
     return Scaffold(
-      appBar: const BarApp(titlePage: 'Stats', icon: null),
+      appBar: const BarApp(titlePage: 'Stats'),
       body: Container(
         padding: const EdgeInsets.all(10),
         child: ListView(
           children: [
-            Text(
-              "Weekly Progress",
-              style: TextStyle(
-                color: Theme.of(context).colorScheme.primary,
-                fontSize: 22,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-
-            const SizedBox(height: 15),
+            const MainText(text: "Weekly Progress"),
 
             Card(
               color: Colors.transparent, // لا خلفية
@@ -79,12 +71,9 @@ class _StatsPage extends State<StatsPage> {
                   children: [
                     Text(
                       "Habits Completion",
-                      style: TextStyle(
-                        color: Theme.of(context).colorScheme.primary,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400,
-                      ),
+                      style: Theme.of(context).textTheme.bodyMedium,
                     ),
+
                     const SizedBox(height: 10),
                     Text(
                       "${countProgressWeek()}%",
@@ -139,18 +128,10 @@ class _StatsPage extends State<StatsPage> {
               ),
             ),
 
-            const SizedBox(height: 15),
-
-            Text(
-              "Monthly Overview",
-              style: TextStyle(
-                color: Theme.of(context).colorScheme.primary,
-                fontSize: 22,
-                fontWeight: FontWeight.bold,
-              ),
+            Container(
+              margin: const EdgeInsets.symmetric(vertical: 6),
+              child: const MainText(text: "Monthly Overview"),
             ),
-
-            const SizedBox(height: 15),
 
             Card(
               color: Colors.transparent, // لا خلفية
@@ -172,11 +153,7 @@ class _StatsPage extends State<StatsPage> {
                   children: [
                     Text(
                       "Habits Completion",
-                      style: TextStyle(
-                        color: Theme.of(context).colorScheme.primary,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400,
-                      ),
+                      style: Theme.of(context).textTheme.bodyMedium,
                     ),
                     const SizedBox(height: 10),
                     Text(

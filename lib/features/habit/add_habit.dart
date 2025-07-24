@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:habit_track/controllers/database/sqldb.dart';
 import 'package:habit_track/controllers/state_management/habit_provider.dart';
 import 'package:habit_track/features/habit/habit.dart';
+import 'package:habit_track/features/tools/appbar.dart';
 import 'package:habit_track/features/tools/icon.dart';
 import 'package:habit_track/features/tools/material_button.dart';
 import 'package:habit_track/features/tools/text_form_filed.dart';
@@ -130,22 +131,7 @@ ${habitName.text}',
   Widget build(BuildContext context) {
     return Scaffold(
       // * appBar is here
-      appBar: AppBar(
-        centerTitle: true,
-        title: const Text(
-          "New Habit",
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        backgroundColor: const Color(0xFF111C22),
-        leading: IconButton(
-          onPressed: () => Get.back(),
-          icon: const Icon(Icons.clear, size: 30, color: Colors.white),
-        ),
-      ),
+      appBar: const BarApp(titlePage: "New Habit"),
 
       // * Body is here
       body: Container(
@@ -275,14 +261,8 @@ ${habitName.text}',
               maxLines: 5,
             ),
             const SizedBox(height: 20),
-            const Text(
-              "Frequency",
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
+            Text("Frequency", style: Theme.of(context).textTheme.bodyLarge),
+
             const SizedBox(height: 10),
 
             Consumer<HabitProvider>(
@@ -307,17 +287,17 @@ ${habitName.text}',
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text(
+                Text(
                   "SubTasks (Optional)",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: Theme.of(context).textTheme.bodyLarge,
                 ),
                 IconButton(
                   onPressed: addSubTaskField,
-                  icon: const Icon(Icons.add, color: Colors.white, size: 30),
+                  icon: Icon(
+                    Icons.add,
+                    color: Theme.of(context).colorScheme.primary,
+                    size: 30,
+                  ),
                 ),
               ],
             ),
@@ -331,13 +311,9 @@ ${habitName.text}',
         child: FloatingActionButton(
           onPressed: saveHabit,
           backgroundColor: const Color(0xFF47b5eb),
-          child: const Text(
+          child: Text(
             "Save Habit",
-            style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-              fontSize: 18,
-            ),
+            style: Theme.of(context).textTheme.bodyMedium,
           ),
         ),
       ),

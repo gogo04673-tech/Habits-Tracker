@@ -66,8 +66,8 @@ class _HabitBarChartState extends State<HabitBarChart> {
                         final columnList = widget.listBar;
                         return Text(
                           columnList[value.toInt()],
-                          style: TextStyle(
-                            color: Theme.of(context).colorScheme.secondary,
+                          style: const TextStyle(
+                            color: Colors.grey,
                             fontSize: 12,
                           ),
                         );

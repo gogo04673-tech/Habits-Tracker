@@ -33,29 +33,39 @@ class _CalendarTableState extends State<CalendarTable> {
         ).updateSelectedDay(selectedDay);
       },
 
-      headerStyle: const HeaderStyle(
+      headerStyle: HeaderStyle(
         titleTextStyle: TextStyle(
-          color: Colors.white,
+          color: Theme.of(context).colorScheme.primary,
           fontWeight: FontWeight.bold,
         ),
         titleCentered: true,
         formatButtonVisible: false,
         formatButtonShowsNext: false,
-        formatButtonTextStyle: TextStyle(color: Colors.white),
-        formatButtonDecoration: BoxDecoration(color: Colors.white),
-        leftChevronIcon: Icon(Icons.chevron_left, color: Colors.white),
-        rightChevronIcon: Icon(Icons.chevron_right, color: Colors.white),
+        formatButtonTextStyle: TextStyle(
+          color: Theme.of(context).colorScheme.primary,
+        ),
+        formatButtonDecoration: BoxDecoration(
+          color: Theme.of(context).colorScheme.primary,
+        ),
+        leftChevronIcon: Icon(
+          Icons.chevron_left,
+          color: Theme.of(context).colorScheme.primary,
+        ),
+        rightChevronIcon: Icon(
+          Icons.chevron_right,
+          color: Theme.of(context).colorScheme.primary,
+        ),
       ),
 
       daysOfWeekStyle: DaysOfWeekStyle(
-        weekdayStyle: const TextStyle(
-          color: Colors.white,
+        weekdayStyle: TextStyle(
+          color: Theme.of(context).colorScheme.primary,
           fontWeight: FontWeight.bold,
           fontSize: 12,
         ),
 
-        weekendStyle: const TextStyle(
-          color: Colors.white,
+        weekendStyle: TextStyle(
+          color: Theme.of(context).colorScheme.primary,
           fontWeight: FontWeight.bold,
           fontSize: 12,
         ),
@@ -141,7 +151,9 @@ class _CalendarTableState extends State<CalendarTable> {
               style: TextStyle(
                 color: day.day == focusedDay.day
                     ? const Color(0xFF0bda57) // custom green for focused day
-                    : Colors.white, // white for normal Sundays
+                    : Theme.of(
+                        context,
+                      ).colorScheme.primary, // white for normal Sundays
                 fontSize: day.day == focusedDay.day ? 15 : 13,
                 fontWeight: FontWeight.bold,
               ),

@@ -1,22 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class BarApp extends StatelessWidget implements PreferredSizeWidget {
+class BarApp extends ConsumerWidget implements PreferredSizeWidget {
   const BarApp({
     super.key,
     required this.titlePage,
-    this.icon,
+    this.iconButton,
     this.onPressed,
     this.leading = false,
     this.onTap,
   });
   final String titlePage;
-  final IconData? icon;
+  final Widget? iconButton;
   final void Function()? onPressed;
   final void Function()? onTap;
   final bool leading;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ref) {
     return AppBar(
       leading: !leading
           ? null
@@ -35,14 +36,20 @@ class BarApp extends StatelessWidget implements PreferredSizeWidget {
         ),
       ),
 
-      actions: [
-        IconButton(
-          onPressed: onPressed,
-          icon: Icon(icon),
-          iconSize: 30,
-          color: Theme.of(context).colorScheme.primary,
-        ),
-      ],
+      // actions: [
+      //   Consumer(
+      //     builder: (context, ref, child) {
+      //       return Builder(
+      //         builder: (context) => IconButton(
+      //           onPressed: () {
+      //             ref.watch(ZoomNotifier).toggle!();
+      //           },
+      //           icon: const Icon(Icons.settings),
+      //         ),
+      //       );
+      //     },
+      //   ),
+      // ],
     );
   }
 
